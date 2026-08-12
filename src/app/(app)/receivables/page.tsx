@@ -90,7 +90,7 @@ export default async function ReceivablesPage({
         </Card>
 
         <Card>
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Baixa rápida</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Baixa rápida</h2>
           <form action={payInstallmentAction} className="space-y-3">
             <input type="hidden" name="redirectTo" value="/receivables" />
             <Field label="Parcela em aberto">

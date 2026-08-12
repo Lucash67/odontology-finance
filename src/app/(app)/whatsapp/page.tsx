@@ -38,7 +38,7 @@ export default async function WhatsAppPage({
 
       <div className="grid gap-4 xl:grid-cols-2">
         <Card>
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Simular envio</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Simular envio</h2>
           <form action={simulateWhatsAppAction} className="space-y-3">
             <Field label="Parcela">
               <Select name="installmentId" required defaultValue="">
@@ -76,7 +76,7 @@ export default async function WhatsAppPage({
         </Card>
 
         <Card>
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Histórico</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Histórico</h2>
           {messages.length === 0 ? (
             <EmptyState title="Sem mensagens" description="Simule um lembrete ou cobrança." />
           ) : (

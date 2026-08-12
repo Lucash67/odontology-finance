@@ -48,7 +48,7 @@ export default async function ExpenseDetailPage({
         ].map(([label, value]) => (
           <Card key={label} className="!p-4">
             <p className="text-xs uppercase text-[var(--muted)]">{label}</p>
-            <p className="mt-1 font-[family-name:var(--font-display)] text-xl">{value}</p>
+            <p className="mt-1 text-[18px] font-semibold tracking-tight">{value}</p>
           </Card>
         ))}
       </div>
@@ -65,7 +65,7 @@ export default async function ExpenseDetailPage({
         </Card>
 
         <Card>
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Registrar pagamento</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Registrar pagamento</h2>
           {balance <= 0 ? (
             <p className="text-sm text-[var(--muted)]">Despesa quitada.</p>
           ) : (
@@ -96,7 +96,7 @@ export default async function ExpenseDetailPage({
       </div>
 
       <Card className="mt-4">
-        <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Histórico de pagamentos</h2>
+        <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Histórico de pagamentos</h2>
         {expense.payments.length === 0 ? (
           <p className="text-sm text-[var(--muted)]">Nenhum pagamento registrado.</p>
         ) : (

@@ -73,7 +73,7 @@ export default async function PatientDetailPage({
         </Card>
 
         <Card>
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Tratamentos</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Tratamentos</h2>
           <div className="space-y-3">
             {patient.treatments.map((t) => (
               <Link

@@ -76,7 +76,7 @@ export default async function PatientsPage({
         </Card>
 
         <Card>
-          <h2 className="mb-4 font-[family-name:var(--font-display)] text-xl">Novo paciente</h2>
+          <h2 className="mb-4 text-[18px] font-semibold tracking-tight">Novo paciente</h2>
           <form action={createPatientAction} className="space-y-3">
             <Field label="Nome completo">
               <Input name="fullName" required />

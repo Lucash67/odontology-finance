@@ -42,14 +42,14 @@ export default async function TreatmentDetailPage({
         ].map(([label, value]) => (
           <Card key={label} className="!p-4">
             <p className="text-xs uppercase text-[var(--muted)]">{label}</p>
-            <p className="mt-1 font-[family-name:var(--font-display)] text-xl">{value}</p>
+            <p className="mt-1 text-[18px] font-semibold tracking-tight">{value}</p>
           </Card>
         ))}
       </div>
 
       {!treatment.paymentPlan ? (
         <Card className="mb-4 max-w-3xl">
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Criar plano financeiro</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Criar plano financeiro</h2>
           <form action={createPlan} className="grid gap-3 sm:grid-cols-2">
             <Field label="Entrada">
               <Input name="downPaymentAmount" type="number" step="0.01" min="0" defaultValue="0" required />
@@ -87,7 +87,7 @@ export default async function TreatmentDetailPage({
       ) : null}
 
       <Card>
-        <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Parcelas</h2>
+        <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Parcelas</h2>
         {treatment.installments.length === 0 ? (
           <p className="text-sm text-[var(--muted)]">Nenhuma parcela gerada ainda.</p>
         ) : (

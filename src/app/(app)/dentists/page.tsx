@@ -45,7 +45,7 @@ export default async function DentistsPage({
           )}
         </Card>
         <Card>
-          <h2 className="mb-4 font-[family-name:var(--font-display)] text-xl">Novo dentista</h2>
+          <h2 className="mb-4 text-[18px] font-semibold tracking-tight">Novo dentista</h2>
           <form action={createDentistAction} className="space-y-3">
             <Field label="Nome">
               <Input name="fullName" required />

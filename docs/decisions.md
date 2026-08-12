@@ -33,6 +33,7 @@ Legenda: **DECIDIDO** · **ASSUNÇÃO REVERSÍVEL** · **PENDENTE**
 | D-19 | Recorrência de despesa: campo persistido; geração automática futura | ASSUNÇÃO REVERSÍVEL | V1 grava `NONE/MONTHLY/YEARLY` sem auto-gerar próximas |
 | D-20 | Entrada do plano **não** gera parcela/pagamento automático | ASSUNÇÃO REVERSÍVEL | Entra no saldo do tratamento; pode virar pagamento depois |
 | D-21 | Importação da planilha: só campos `importSource`/`externalRef` preparados | DECIDIDO | Migração em etapa separada |
+| D-22 | UI alinhada ao template Stackwise (vídeo 2026-08-11): Inter, cream `#f7f6f2`, verde `#009050`, sidebar escura, cards com sombra suave, botões pill, fade-up | DECIDIDO | Referência visual do cliente |
 
 ---
 

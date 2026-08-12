@@ -70,7 +70,7 @@ export default async function ExpensesPage({
         </Card>
 
         <Card>
-          <h2 className="mb-3 font-[family-name:var(--font-display)] text-xl">Nova despesa</h2>
+          <h2 className="mb-3 text-[18px] font-semibold tracking-tight">Nova despesa</h2>
           <form action={createExpenseAction} className="space-y-3">
             <Field label="Descrição">
               <Input name="description" required />

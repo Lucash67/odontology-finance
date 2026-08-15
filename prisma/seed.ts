@@ -13,6 +13,10 @@ import { splitInstallments, roundMoney } from "../src/lib/money";
 import { computeInstallmentStatus } from "../src/domain/installments";
 import { computeExpenseStatus } from "../src/domain/payables";
 
+/**
+ * Seed 100% fictício para demo/portfólio.
+ * Nenhum dado de clínica real ou planilha de cliente.
+ */
 const prisma = new PrismaClient();
 
 async function main() {
@@ -33,12 +37,12 @@ async function main() {
   await prisma.user.deleteMany();
   await prisma.setting.deleteMany();
 
-  const passwordHash = await bcrypt.hash("admin123", 10);
+  const passwordHash = await bcrypt.hash("demo1234", 10);
 
   const admin = await prisma.user.create({
     data: {
-      name: "Administradora",
-      email: "admin@clinic.dev",
+      name: "Demo Admin",
+      email: "demo@odontology.finance",
       passwordHash,
       role: Role.ADMIN,
     },
@@ -46,25 +50,25 @@ async function main() {
 
   await prisma.user.create({
     data: {
-      name: "Financeiro",
-      email: "financeiro@clinic.dev",
-      passwordHash: await bcrypt.hash("financeiro123", 10),
+      name: "Demo Financeiro",
+      email: "finance@odontology.finance",
+      passwordHash: await bcrypt.hash("demo1234", 10),
       role: Role.FINANCIAL,
     },
   });
 
   await prisma.user.create({
     data: {
-      name: "Recepção",
-      email: "recepcao@clinic.dev",
-      passwordHash: await bcrypt.hash("recepcao123", 10),
+      name: "Demo Recepção",
+      email: "front@odontology.finance",
+      passwordHash: await bcrypt.hash("demo1234", 10),
       role: Role.RECEPTIONIST,
     },
   });
 
   await prisma.setting.create({
     data: {
-      clinicName: "Clínica Odontológica Demo",
+      clinicName: "Aurora Dental Studio (Demo)",
       defaultDueDay: 5,
       reminderDaysBefore: 3,
       overdueChargeDays: 3,
@@ -86,33 +90,31 @@ async function main() {
 
   const suppliers = await Promise.all(
     [
-      { name: "Lab Prótese Norte", phone: "85999990001" },
-      { name: "Dental Supply CE", phone: "85999990002" },
-      { name: "Imobiliária Centro", phone: "85999990003" },
-      { name: "Clean Office Serviços", phone: "85999990004" },
+      { name: "Lab Smile Protese", phone: "11999990001" },
+      { name: "Dental Market Brasil", phone: "11999990002" },
+      { name: "Espaço Comercial Alpha", phone: "11999990003" },
+      { name: "Higiene & Cia Serviços", phone: "11999990004" },
     ].map((s) => prisma.supplier.create({ data: s })),
   );
 
   const dentists = await Promise.all(
-    ["Dr. Ruy Almeida", "Dr. Henrique Costa", "Dra. Camille Ferreira"].map((fullName) =>
+    ["Dra. Marina Oliveira", "Dr. Pedro Santos", "Dra. Laura Mendes"].map((fullName) =>
       prisma.dentist.create({ data: { fullName } }),
     ),
   );
 
   const patientsData = [
-    { fullName: "Ana Beatriz Monteiro", whatsapp: "85991010001", phone: "85991010001" },
-    { fullName: "Bruno César Andrade", whatsapp: "85991010002", phone: "85991010002" },
-    { fullName: "Camila Duarte Lopes", whatsapp: "85991010003", phone: "85991010003" },
-    { fullName: "Diego Fernandes Rocha", whatsapp: "85991010004", phone: "85991010004" },
-    { fullName: "Elisa Gomes Nascimento", whatsapp: "85991010005", phone: "85991010005" },
-    { fullName: "Fábio Henrique Pires", whatsapp: "85991010006", phone: "85991010006" },
-    { fullName: "Gabriela Ivo Martins", whatsapp: "85991010007", phone: "85991010007" },
-    { fullName: "Hugo Jorge Teixeira", whatsapp: "85991010008", phone: "85991010008" },
+    { fullName: "Alex Rivera Costa", whatsapp: "11988880001", phone: "11988880001" },
+    { fullName: "Bianca Torres Lima", whatsapp: "11988880002", phone: "11988880002" },
+    { fullName: "Carlos Nogueira Silva", whatsapp: "11988880003", phone: "11988880003" },
+    { fullName: "Diana Prado Souza", whatsapp: "11988880004", phone: "11988880004" },
+    { fullName: "Eduardo Ramos Pinto", whatsapp: "11988880005", phone: "11988880005" },
+    { fullName: "Fernanda Dias Rocha", whatsapp: "11988880006", phone: "11988880006" },
+    { fullName: "Gustavo Melo Cardoso", whatsapp: "11988880007", phone: "11988880007" },
+    { fullName: "Helena Barbosa Cruz", whatsapp: "11988880008", phone: "11988880008" },
   ];
 
-  const patients = await Promise.all(
-    patientsData.map((p) => prisma.patient.create({ data: p })),
-  );
+  const patients = await Promise.all(patientsData.map((p) => prisma.patient.create({ data: p })));
 
   const treatmentsSeed = [
     { patient: 0, dentist: 0, description: "Reabilitação oral completa", amount: 12000, down: 2000, n: 10, firstOffset: -4, payFirst: 4 },
@@ -140,7 +142,7 @@ async function main() {
         contractedAmount: t.amount,
         status: TreatmentStatus.ACTIVE,
         budgetDate: subMonths(firstDue, 1),
-        notes: "Seed de desenvolvimento",
+        notes: "Dados fictícios de demonstração",
       },
     });
 
@@ -189,7 +191,7 @@ async function main() {
             paymentMethodId: pix.id,
             amount: amountPaid,
             paidAt: dueDate,
-            notes: "Pagamento seed",
+            notes: "Pagamento demo",
             createdById: admin.id,
           },
         });
@@ -198,11 +200,11 @@ async function main() {
   }
 
   const expenseSeeds = [
-    { supplier: 2, category: 0, description: "Aluguel da clínica", amount: 4500, dueOffset: -5, paid: true, recurrence: Recurrence.MONTHLY },
-    { supplier: 0, category: 1, description: "Prótese paciente Ana", amount: 1200, dueOffset: 3, paid: false, recurrence: Recurrence.NONE },
+    { supplier: 2, category: 0, description: "Aluguel do estúdio", amount: 4500, dueOffset: -5, paid: true, recurrence: Recurrence.MONTHLY },
+    { supplier: 0, category: 1, description: "Prótese paciente demo", amount: 1200, dueOffset: 3, paid: false, recurrence: Recurrence.NONE },
     { supplier: 1, category: 2, description: "Resinas e descartáveis", amount: 890, dueOffset: -2, paid: true, recurrence: Recurrence.NONE },
     { supplier: 3, category: 4, description: "Limpeza mensal", amount: 650, dueOffset: 2, paid: false, recurrence: Recurrence.MONTHLY },
-    { supplier: 1, category: 2, description: "Kit implante", amount: 1800, dueOffset: -10, paid: false, recurrence: Recurrence.NONE },
+    { supplier: 1, category: 2, description: "Kit cirúrgico demo", amount: 1800, dueOffset: -10, paid: false, recurrence: Recurrence.NONE },
     { supplier: null, category: 3, description: "Assinatura software clínico", amount: 299, dueOffset: 8, paid: false, recurrence: Recurrence.MONTHLY },
   ];
 
@@ -236,7 +238,7 @@ async function main() {
         },
       });
     } else if (status === ExpenseStatus.OVERDUE) {
-      // leave unpaid overdue
+      // leave unpaid overdue for demo dashboard
     }
   }
 
@@ -260,8 +262,8 @@ async function main() {
     ],
   });
 
-  console.log("Seed OK");
-  console.log("Login: admin@clinic.dev / admin123");
+  console.log("Seed OK (portfolio/demo)");
+  console.log("Login: demo@odontology.finance / demo1234");
 }
 
 main()

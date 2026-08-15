@@ -29,7 +29,7 @@ export default async function LoginPage({
             Controle financeiro que escala com o consultório
           </h1>
           <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[var(--muted)]">
-            Pacientes, parcelas, inadimplência e contas a pagar em um fluxo limpo — no estilo do template.
+            Pacientes, parcelas, inadimplência e contas a pagar em um fluxo limpo — demo de portfólio.
           </p>
         </div>
 
@@ -37,17 +37,17 @@ export default async function LoginPage({
           <Flash message={params.error} tone="error" />
           <form action={loginAction} className="space-y-4">
             <Field label="E-mail">
-              <Input name="email" type="email" required defaultValue="admin@clinic.dev" />
+              <Input name="email" type="email" required defaultValue="demo@odontology.finance" />
             </Field>
             <Field label="Senha">
-              <Input name="password" type="password" required defaultValue="admin123" />
+              <Input name="password" type="password" required defaultValue="demo1234" />
             </Field>
             <Button type="submit" className="w-full">
               Entrar →
             </Button>
           </form>
           <p className="mt-4 text-center text-[12px] text-[var(--muted)]">
-            Seed: admin@clinic.dev / admin123
+            Demo: demo@odontology.finance / demo1234
           </p>
         </Card>
       </main>

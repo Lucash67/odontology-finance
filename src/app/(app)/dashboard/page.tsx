@@ -72,7 +72,7 @@ export default async function DashboardPage() {
     <div>
       <PageHeader
         title="Dashboard"
-        description="Visão do mês corrente com dados reais do consultório."
+        description="Visão do mês corrente com dados de demonstração do consultório."
       />
 
       <div className="sw-stagger grid gap-3 sm:grid-cols-2 xl:grid-cols-4">

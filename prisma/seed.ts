@@ -68,10 +68,10 @@ async function main() {
 
   await prisma.setting.create({
     data: {
-      clinicName: "Aurora Dental Studio (Demo)",
-      defaultDueDay: 5,
-      reminderDaysBefore: 3,
-      overdueChargeDays: 3,
+      clinicName: "NovaLume Odontologia (Demo)",
+      defaultDueDay: 12,
+      reminderDaysBefore: 4,
+      overdueChargeDays: 5,
       whatsappEnabled: false,
     },
   });
@@ -83,48 +83,54 @@ async function main() {
   );
 
   const categories = await Promise.all(
-    ["Aluguel", "Laboratório", "Materiais", "Software", "Limpeza", "Impostos", "Marketing"].map(
+    ["Aluguel", "Laboratório", "Materiais", "Software", "Limpeza", "Impostos", "Marketing", "Energia"].map(
       (name) => prisma.category.create({ data: { name, kind: "EXPENSE" } }),
     ),
   );
 
   const suppliers = await Promise.all(
     [
-      { name: "Lab Smile Protese", phone: "11999990001" },
-      { name: "Dental Market Brasil", phone: "11999990002" },
-      { name: "Espaço Comercial Alpha", phone: "11999990003" },
-      { name: "Higiene & Cia Serviços", phone: "11999990004" },
+      { name: "Cerâmica Digital Norte", phone: "21977770001" },
+      { name: "Insumos Verde Mar", phone: "21977770002" },
+      { name: "Cowork Odontológico Sul", phone: "21977770003" },
+      { name: "CleanDay Facility", phone: "21977770004" },
+      { name: "FluxAds Marketing", phone: "21977770005" },
     ].map((s) => prisma.supplier.create({ data: s })),
   );
 
   const dentists = await Promise.all(
-    ["Dra. Marina Oliveira", "Dr. Pedro Santos", "Dra. Laura Mendes"].map((fullName) =>
-      prisma.dentist.create({ data: { fullName } }),
+    ["Dra. Sofia Albuquerque", "Dr. Renato Vale", "Dra. Camila Freitas", "Dr. Ícaro Brandt"].map(
+      (fullName) => prisma.dentist.create({ data: { fullName } }),
     ),
   );
 
+  // Nomes e valores inventados — escala/mix deliberadamente diferentes de qualquer carteira real.
   const patientsData = [
-    { fullName: "Alex Rivera Costa", whatsapp: "11988880001", phone: "11988880001" },
-    { fullName: "Bianca Torres Lima", whatsapp: "11988880002", phone: "11988880002" },
-    { fullName: "Carlos Nogueira Silva", whatsapp: "11988880003", phone: "11988880003" },
-    { fullName: "Diana Prado Souza", whatsapp: "11988880004", phone: "11988880004" },
-    { fullName: "Eduardo Ramos Pinto", whatsapp: "11988880005", phone: "11988880005" },
-    { fullName: "Fernanda Dias Rocha", whatsapp: "11988880006", phone: "11988880006" },
-    { fullName: "Gustavo Melo Cardoso", whatsapp: "11988880007", phone: "11988880007" },
-    { fullName: "Helena Barbosa Cruz", whatsapp: "11988880008", phone: "11988880008" },
+    { fullName: "Iris Quental", whatsapp: "21966660001", phone: "21966660001" },
+    { fullName: "Noah Belmonte", whatsapp: "21966660002", phone: "21966660002" },
+    { fullName: "Lara Vianna", whatsapp: "21966660003", phone: "21966660003" },
+    { fullName: "Theo Galvão", whatsapp: "21966660004", phone: "21966660004" },
+    { fullName: "Maya Ortega", whatsapp: "21966660005", phone: "21966660005" },
+    { fullName: "Otto Brandão", whatsapp: "21966660006", phone: "21966660006" },
+    { fullName: "Nina Severino", whatsapp: "21966660007", phone: "21966660007" },
+    { fullName: "Léo Farage", whatsapp: "21966660008", phone: "21966660008" },
+    { fullName: "Yuki Nakamura", whatsapp: "21966660009", phone: "21966660009" },
+    { fullName: "Ayla Montenegro", whatsapp: "21966660010", phone: "21966660010" },
   ];
 
   const patients = await Promise.all(patientsData.map((p) => prisma.patient.create({ data: p })));
 
   const treatmentsSeed = [
-    { patient: 0, dentist: 0, description: "Reabilitação oral completa", amount: 12000, down: 2000, n: 10, firstOffset: -4, payFirst: 4 },
-    { patient: 1, dentist: 0, description: "Implante unitário", amount: 6500, down: 1500, n: 8, firstOffset: -2, payFirst: 2 },
-    { patient: 2, dentist: 1, description: "Aparelho ortodôntico", amount: 4800, down: 800, n: 12, firstOffset: -1, payFirst: 1 },
-    { patient: 3, dentist: 0, description: "Prótese total", amount: 3500, down: 500, n: 6, firstOffset: -6, payFirst: 3 },
-    { patient: 4, dentist: 2, description: "Clareamento + restaurações", amount: 2200, down: 0, n: 4, firstOffset: 0, payFirst: 0 },
-    { patient: 5, dentist: 0, description: "Canal + coroa", amount: 2800, down: 800, n: 5, firstOffset: -3, payFirst: 5 },
-    { patient: 6, dentist: 1, description: "Extração + enxerto", amount: 4100, down: 1000, n: 6, firstOffset: 1, payFirst: 0 },
-    { patient: 7, dentist: 2, description: "Limpeza e prevenção anual", amount: 600, down: 0, n: 2, firstOffset: -1, payFirst: 1 },
+    { patient: 0, dentist: 0, description: "Alinhadores estéticos (18 meses)", amount: 9800, down: 2800, n: 14, firstOffset: -5, payFirst: 5 },
+    { patient: 1, dentist: 1, description: "Facetas em resina (6 elementos)", amount: 7200, down: 1200, n: 10, firstOffset: -3, payFirst: 3 },
+    { patient: 2, dentist: 2, description: "Protocolo sobre 4 implantes", amount: 18500, down: 4500, n: 18, firstOffset: -2, payFirst: 2 },
+    { patient: 3, dentist: 0, description: "Ortodontia interceptativa", amount: 5400, down: 900, n: 9, firstOffset: -7, payFirst: 6 },
+    { patient: 4, dentist: 3, description: "Cirurgia de terceiros molares", amount: 3100, down: 600, n: 4, firstOffset: 0, payFirst: 0 },
+    { patient: 5, dentist: 1, description: "Endodontia + pinos + coroa CAD/CAM", amount: 4650, down: 1150, n: 7, firstOffset: -4, payFirst: 4 },
+    { patient: 6, dentist: 2, description: "Enxerto ósseo + membrana", amount: 8900, down: 2000, n: 12, firstOffset: 1, payFirst: 0 },
+    { patient: 7, dentist: 3, description: "Manutenção periodontal trimestral", amount: 960, down: 0, n: 3, firstOffset: -1, payFirst: 1 },
+    { patient: 8, dentist: 0, description: "Clareamento a laser + moldeira", amount: 1850, down: 450, n: 3, firstOffset: -1, payFirst: 2 },
+    { patient: 9, dentist: 1, description: "Prótese parcial flexível", amount: 2750, down: 750, n: 5, firstOffset: -6, payFirst: 5 },
   ];
 
   const pix = methods[0];
@@ -132,7 +138,7 @@ async function main() {
   for (const t of treatmentsSeed) {
     const patient = patients[t.patient];
     const dentist = dentists[t.dentist];
-    const firstDue = addMonths(new Date(new Date().getFullYear(), new Date().getMonth(), 5), t.firstOffset);
+    const firstDue = addMonths(new Date(new Date().getFullYear(), new Date().getMonth(), 12), t.firstOffset);
 
     const treatment = await prisma.treatment.create({
       data: {
@@ -156,7 +162,7 @@ async function main() {
         installmentsCount: t.n,
         installmentAmount: amounts[0],
         firstDueDate: firstDue,
-        dueDay: 5,
+        dueDay: 12,
         dueRule: DueRule.INTERVAL_MONTHS,
         intervalMonths: 1,
       },
@@ -200,17 +206,19 @@ async function main() {
   }
 
   const expenseSeeds = [
-    { supplier: 2, category: 0, description: "Aluguel do estúdio", amount: 4500, dueOffset: -5, paid: true, recurrence: Recurrence.MONTHLY },
-    { supplier: 0, category: 1, description: "Prótese paciente demo", amount: 1200, dueOffset: 3, paid: false, recurrence: Recurrence.NONE },
-    { supplier: 1, category: 2, description: "Resinas e descartáveis", amount: 890, dueOffset: -2, paid: true, recurrence: Recurrence.NONE },
-    { supplier: 3, category: 4, description: "Limpeza mensal", amount: 650, dueOffset: 2, paid: false, recurrence: Recurrence.MONTHLY },
-    { supplier: 1, category: 2, description: "Kit cirúrgico demo", amount: 1800, dueOffset: -10, paid: false, recurrence: Recurrence.NONE },
-    { supplier: null, category: 3, description: "Assinatura software clínico", amount: 299, dueOffset: 8, paid: false, recurrence: Recurrence.MONTHLY },
+    { supplier: 2, category: 0, description: "Cowork + sala clínica", amount: 6800, dueOffset: -4, paid: true, recurrence: Recurrence.MONTHLY },
+    { supplier: 0, category: 1, description: "Protocolo cerâmico paciente demo", amount: 2400, dueOffset: 5, paid: false, recurrence: Recurrence.NONE },
+    { supplier: 1, category: 2, description: "Kit biomateriais e adesivos", amount: 1340, dueOffset: -1, paid: true, recurrence: Recurrence.NONE },
+    { supplier: 3, category: 4, description: "Higienização semanal", amount: 980, dueOffset: 3, paid: false, recurrence: Recurrence.MONTHLY },
+    { supplier: 1, category: 2, description: "Estoque de descartáveis Q3", amount: 2150, dueOffset: -12, paid: false, recurrence: Recurrence.NONE },
+    { supplier: null, category: 3, description: "Plataforma de prontuário + agenda", amount: 449, dueOffset: 9, paid: false, recurrence: Recurrence.MONTHLY },
+    { supplier: 4, category: 6, description: "Campanha Google Ads local", amount: 750, dueOffset: -3, paid: true, recurrence: Recurrence.NONE },
+    { supplier: null, category: 7, description: "Conta de energia clínica", amount: 620, dueOffset: 6, paid: false, recurrence: Recurrence.MONTHLY },
   ];
 
   for (const e of expenseSeeds) {
     const dueDate = addMonths(new Date(), 0);
-    const due = subDays(new Date(dueDate.getFullYear(), dueDate.getMonth(), 10), -e.dueOffset);
+    const due = subDays(new Date(dueDate.getFullYear(), dueDate.getMonth(), 15), -e.dueOffset);
     const amountPaid = e.paid ? e.amount : 0;
     const status = computeExpenseStatus(e.amount, amountPaid, due);
 

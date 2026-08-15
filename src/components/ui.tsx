@@ -19,7 +19,7 @@ export function PageHeader({
   return (
     <div className="sw-animate-in mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="text-[28px] font-semibold tracking-tight text-[var(--ink)] sm:text-[32px]">
+        <h1 className="text-[24px] font-semibold tracking-tight text-[var(--ink)] sm:text-[32px]">
           {title}
         </h1>
         {description ? (
@@ -45,7 +45,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--bg-elevated)] p-5 shadow-[var(--shadow-card)] transition duration-300 ease-out",
+        "rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--bg-elevated)] p-4 shadow-[var(--shadow-card)] transition duration-300 ease-out sm:p-5",
         hover && "hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)]",
         className,
       )}
@@ -87,7 +87,9 @@ export function KpiCard({
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[12px] font-medium text-[var(--muted)]">{label}</p>
-          <p className="mt-2 text-[24px] font-semibold tracking-tight text-[var(--ink)]">{value}</p>
+          <p className="mt-2 break-words text-[20px] font-semibold tracking-tight text-[var(--ink)] sm:text-[24px]">
+            {value}
+          </p>
         </div>
         {icon ? (
           <span className={cn("inline-flex h-9 w-9 items-center justify-center rounded-xl", iconBg[tone])}>

@@ -18,30 +18,32 @@ export default async function UsersPage({
       <Flash message={params.ok} />
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <Card>
-          <table className="min-w-full text-left text-sm">
-            <thead className="text-xs uppercase text-[var(--muted)]">
-              <tr>
-                <th className="py-2">Nome</th>
-                <th className="py-2">E-mail</th>
-                <th className="py-2">Role</th>
-                <th className="py-2">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((u) => (
-                <tr key={u.id} className="border-t border-[var(--line)]">
-                  <td className="py-2 font-medium">{u.name}</td>
-                  <td className="py-2">{u.email}</td>
-                  <td className="py-2">
-                    <Badge tone="brand">{u.role}</Badge>
-                  </td>
-                  <td className="py-2">
-                    <Badge tone={u.active ? "success" : "neutral"}>{u.active ? "Ativo" : "Inativo"}</Badge>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead className="text-xs uppercase text-[var(--muted)]">
+                <tr>
+                  <th className="py-2">Nome</th>
+                  <th className="py-2">E-mail</th>
+                  <th className="py-2">Role</th>
+                  <th className="py-2">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((u) => (
+                  <tr key={u.id} className="border-t border-[var(--line)]">
+                    <td className="py-2 font-medium">{u.name}</td>
+                    <td className="py-2">{u.email}</td>
+                    <td className="py-2">
+                      <Badge tone="brand">{u.role}</Badge>
+                    </td>
+                    <td className="py-2">
+                      <Badge tone={u.active ? "success" : "neutral"}>{u.active ? "Ativo" : "Inativo"}</Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Card>
         <Card>
           {session?.user.role === "ADMIN" ? (

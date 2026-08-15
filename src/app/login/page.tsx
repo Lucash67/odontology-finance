@@ -25,7 +25,7 @@ export default async function LoginPage({
           <span className="inline-flex rounded-[var(--radius-pill)] bg-[var(--brand-soft)] px-3 py-1 text-[12px] font-semibold text-[var(--brand-ink)]">
             Consultório odontológico
           </span>
-          <h1 className="mt-4 text-[40px] font-semibold tracking-tight text-[var(--ink)] sm:text-[48px]">
+          <h1 className="mt-4 text-[28px] font-semibold tracking-tight text-[var(--ink)] sm:text-[48px]">
             Controle financeiro que escala com o consultório
           </h1>
           <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[var(--muted)]">

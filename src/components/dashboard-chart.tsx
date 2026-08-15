@@ -18,12 +18,18 @@ export function DashboardChart({
   data: { month: string; recebido: number; despesas: number }[];
 }) {
   return (
-    <div className="h-72 w-full">
+    <div className="h-56 w-full min-w-0 sm:h-72">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} barGap={6}>
+        <BarChart data={data} barGap={6} margin={{ top: 8, right: 4, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#ebeae4" vertical={false} />
-          <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#6b6b6b" }} axisLine={false} tickLine={false} />
-          <YAxis tick={{ fontSize: 12, fill: "#6b6b6b" }} axisLine={false} tickLine={false} />
+          <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#6b6b6b" }} axisLine={false} tickLine={false} />
+          <YAxis
+            width={42}
+            tick={{ fontSize: 10, fill: "#6b6b6b" }}
+            axisLine={false}
+            tickLine={false}
+            tickFormatter={(v) => `${Math.round(Number(v) / 1000)}k`}
+          />
           <Tooltip
             cursor={{ fill: "#f1efe8" }}
             contentStyle={{

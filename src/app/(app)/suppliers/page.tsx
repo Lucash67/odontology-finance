@@ -19,24 +19,26 @@ export default async function SuppliersPage({
           {suppliers.length === 0 ? (
             <EmptyState title="Sem fornecedores" description="Cadastre laboratórios, imobiliária etc." />
           ) : (
-            <table className="min-w-full text-left text-sm">
-              <thead className="text-xs uppercase text-[var(--muted)]">
-                <tr>
-                  <th className="py-2">Nome</th>
-                  <th className="py-2">Telefone</th>
-                  <th className="py-2">E-mail</th>
-                </tr>
-              </thead>
-              <tbody>
-                {suppliers.map((s) => (
-                  <tr key={s.id} className="border-t border-[var(--line)]">
-                    <td className="py-2 font-medium">{s.name}</td>
-                    <td className="py-2">{s.phone || "—"}</td>
-                    <td className="py-2">{s.email || "—"}</td>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-left text-sm">
+                <thead className="text-xs uppercase text-[var(--muted)]">
+                  <tr>
+                    <th className="py-2">Nome</th>
+                    <th className="py-2">Telefone</th>
+                    <th className="py-2">E-mail</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {suppliers.map((s) => (
+                    <tr key={s.id} className="border-t border-[var(--line)]">
+                      <td className="py-2 font-medium">{s.name}</td>
+                      <td className="py-2">{s.phone || "—"}</td>
+                      <td className="py-2">{s.email || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </Card>
         <Card>

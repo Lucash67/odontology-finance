@@ -22,26 +22,28 @@ export default async function DentistsPage({
           {dentists.length === 0 ? (
             <EmptyState title="Sem dentistas" description="Cadastre o primeiro profissional." />
           ) : (
-            <table className="min-w-full text-left text-sm">
-              <thead className="text-xs uppercase text-[var(--muted)]">
-                <tr>
-                  <th className="py-2">Nome</th>
-                  <th className="py-2">Tratamentos</th>
-                  <th className="py-2">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {dentists.map((d) => (
-                  <tr key={d.id} className="border-t border-[var(--line)]">
-                    <td className="py-2 font-medium">{d.fullName}</td>
-                    <td className="py-2">{d._count.treatments}</td>
-                    <td className="py-2">
-                      <Badge tone={d.active ? "success" : "neutral"}>{d.active ? "Ativo" : "Inativo"}</Badge>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-left text-sm">
+                <thead className="text-xs uppercase text-[var(--muted)]">
+                  <tr>
+                    <th className="py-2">Nome</th>
+                    <th className="py-2">Tratamentos</th>
+                    <th className="py-2">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {dentists.map((d) => (
+                    <tr key={d.id} className="border-t border-[var(--line)]">
+                      <td className="py-2 font-medium">{d.fullName}</td>
+                      <td className="py-2">{d._count.treatments}</td>
+                      <td className="py-2">
+                        <Badge tone={d.active ? "success" : "neutral"}>{d.active ? "Ativo" : "Inativo"}</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </Card>
         <Card>

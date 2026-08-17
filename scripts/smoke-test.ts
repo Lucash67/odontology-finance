@@ -17,7 +17,9 @@ async function main() {
   const patient = await prisma.patient.create({
     data: { fullName: "Smoke Test Paciente", whatsapp: "85990001111" },
   });
-  const dentist = await prisma.dentist.findFirstOrThrow();
+  const dentist = await prisma.dentist.create({
+    data: { fullName: "Smoke Test Dentista" },
+  });
   const method = await prisma.paymentMethod.findFirstOrThrow();
   const category = await prisma.category.findFirstOrThrow();
 

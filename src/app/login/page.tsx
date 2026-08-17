@@ -23,13 +23,13 @@ export default async function LoginPage({
       <main className="relative z-10 mx-auto flex min-h-[calc(100vh-88px)] max-w-5xl flex-col items-center justify-center px-6 pb-16">
         <div className="sw-animate-in mb-8 max-w-xl text-center">
           <span className="inline-flex rounded-[var(--radius-pill)] bg-[var(--brand-soft)] px-3 py-1 text-[12px] font-semibold text-[var(--brand-ink)]">
-            Consultório odontológico
+            Demo de portfólio
           </span>
           <h1 className="mt-4 text-[28px] font-semibold tracking-tight text-[var(--ink)] sm:text-[48px]">
             Controle financeiro que escala com o consultório
           </h1>
           <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[var(--muted)]">
-            Pacientes, parcelas, inadimplência e contas a pagar em um fluxo limpo — demo de portfólio.
+            Base inicia zerada de propósito: sem pacientes, valores ou operação real — só a interface e o fluxo para explorar.
           </p>
         </div>
 

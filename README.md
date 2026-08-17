@@ -2,7 +2,8 @@
 
 Sistema financeiro web para consultório odontológico — **versão demo de portfólio**.
 
-> Todos os dados do seed são **100% fictícios**. Não há informações de clientes reais.
+> A base inicia **zerada de propósito** (sem pacientes, tratamentos, recebíveis ou despesas).  
+> Não há dados de clínica ou operação real — apenas usuários de acesso e catálogos genéricos para explorar o produto.
 
 ## Demo
 
@@ -13,6 +14,7 @@ Sistema financeiro web para consultório odontológico — **versão demo de por
 
 Também: `finance@odontology.finance` / `front@odontology.finance` (mesma senha).
 
+Os totais da dashboard aparecem em R$ 0,00 porque esta é a versão demo, sem lançamentos.
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript

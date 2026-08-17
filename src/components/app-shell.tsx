@@ -20,8 +20,9 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { signOutAction } from "@/app/actions/auth";
 import { BrandLockup } from "@/components/brand";
+import { signOutAction } from "@/app/actions/auth";
+import { DemoBanner } from "@/components/demo-banner";
 
 const groups = [
   {
@@ -175,7 +176,10 @@ export function AppShell({
       </aside>
 
       <main className="min-w-0 px-4 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
-        <div className="sw-animate-fade mx-auto max-w-[1200px]">{children}</div>
+        <div className="sw-animate-fade mx-auto max-w-[1200px]">
+          <DemoBanner />
+          {children}
+        </div>
       </main>
     </div>
   );

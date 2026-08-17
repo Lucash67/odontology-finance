@@ -9,7 +9,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { getDashboardMetrics } from "@/domain/dashboard";
-import { Badge, Card, KpiCard, PageHeader } from "@/components/ui";
+import { Badge, Card, EmptyState, KpiCard, PageHeader } from "@/components/ui";
 import { DashboardChart } from "@/components/dashboard-chart";
 import { formatCurrency, formatDate, toNumber } from "@/lib/utils";
 import { installmentStatusLabel, statusTone } from "@/lib/labels";
@@ -72,7 +72,7 @@ export default async function DashboardPage() {
     <div>
       <PageHeader
         title="Dashboard"
-        description="Visão do mês corrente com dados de demonstração do consultório."
+        description="Indicadores do mês. Nesta demo a base começa vazia — por isso os totais aparecem zerados."
       />
 
       <div className="sw-stagger grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -88,18 +88,24 @@ export default async function DashboardPage() {
             <span className="text-[12px] text-[var(--muted)]">últimos 6 meses</span>
           </div>
           <DashboardChart data={m.chart} />
+          <p className="mt-3 text-[12px] text-[var(--muted)]">
+            Gráfico em zero: não há lançamentos nesta versão demo.
+          </p>
         </Card>
 
         <Card className="sw-animate-in" hover>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-[18px] font-semibold tracking-tight">Needs attention</h2>
-            <Badge tone="danger" dot>
+            <h2 className="text-[18px] font-semibold tracking-tight">Atenção</h2>
+            <Badge tone="neutral" dot>
               {m.overduePatients} pacientes
             </Badge>
           </div>
           <div className="space-y-2">
             {m.overdueInstallments.length === 0 ? (
-              <p className="text-[13px] text-[var(--muted)]">Nenhuma parcela vencida.</p>
+              <EmptyState
+                title="Nada em atraso"
+                description="Sem parcelas vencidas — a demo não inclui carteira de pacientes."
+              />
             ) : (
               m.overdueInstallments.map((i) => (
                 <Link
@@ -132,39 +138,46 @@ export default async function DashboardPage() {
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-[18px] font-semibold tracking-tight">Próximos vencimentos</h2>
           <Link href="/receivables" className="text-[13px] font-semibold text-[var(--brand)] hover:underline">
-            View all
+            Ver recebíveis
           </Link>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-[13px]">
-            <thead className="text-[11px] uppercase tracking-[0.08em] text-[var(--muted-2)]">
-              <tr>
-                <th className="py-2 pr-3 font-medium">Paciente</th>
-                <th className="py-2 pr-3 font-medium">Tratamento</th>
-                <th className="py-2 pr-3 font-medium">Vencimento</th>
-                <th className="py-2 pr-3 font-medium">Saldo</th>
-                <th className="py-2 font-medium">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {m.upcoming.map((i) => (
-                <tr key={i.id} className="border-t border-[var(--line)]">
-                  <td className="py-3 pr-3 font-medium">{i.patient.fullName}</td>
-                  <td className="py-3 pr-3 text-[var(--muted)]">{i.treatment.description}</td>
-                  <td className="py-3 pr-3">{formatDate(i.dueDate)}</td>
-                  <td className="py-3 pr-3 font-semibold">
-                    {formatCurrency(toNumber(i.amount) - toNumber(i.amountPaid))}
-                  </td>
-                  <td className="py-3">
-                    <Badge tone={statusTone(i.status)} dot>
-                      {installmentStatusLabel[i.status]}
-                    </Badge>
-                  </td>
+        {m.upcoming.length === 0 ? (
+          <EmptyState
+            title="Sem vencimentos"
+            description="Cadastre pacientes e planos se quiser simular o fluxo — a demo inicia sem operação."
+          />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-[13px]">
+              <thead className="text-[11px] uppercase tracking-[0.08em] text-[var(--muted-2)]">
+                <tr>
+                  <th className="py-2 pr-3 font-medium">Paciente</th>
+                  <th className="py-2 pr-3 font-medium">Tratamento</th>
+                  <th className="py-2 pr-3 font-medium">Vencimento</th>
+                  <th className="py-2 pr-3 font-medium">Saldo</th>
+                  <th className="py-2 font-medium">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {m.upcoming.map((i) => (
+                  <tr key={i.id} className="border-t border-[var(--line)]">
+                    <td className="py-3 pr-3 font-medium">{i.patient.fullName}</td>
+                    <td className="py-3 pr-3 text-[var(--muted)]">{i.treatment.description}</td>
+                    <td className="py-3 pr-3">{formatDate(i.dueDate)}</td>
+                    <td className="py-3 pr-3 font-semibold">
+                      {formatCurrency(toNumber(i.amount) - toNumber(i.amountPaid))}
+                    </td>
+                    <td className="py-3">
+                      <Badge tone={statusTone(i.status)} dot>
+                        {installmentStatusLabel[i.status]}
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </Card>
     </div>
   );
